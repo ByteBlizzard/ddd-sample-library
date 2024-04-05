@@ -16,9 +16,11 @@ repositories {
 }
 
 dependencies {
+    val mockkVersion = "1.13.10"
     implementation("org.springframework:spring-context:6.1.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation(kotlin("test"))
+    testImplementation("io.mockk:mockk:${mockkVersion}")
 }
 
 tasks.withType<KotlinCompile> {
