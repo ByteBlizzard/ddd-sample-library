@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+
+entity "书" as book {
+    * 二维码
+    isbn
+    是否上架
+}
+
+entity "借书" as borrow {
+    * 借书id
+    书二维码
+    是否上报过遗失
+    是否待归还
+    借书时间
+}
+
+entity "预定" as reserve {
+    * 预定id
+    预定时间
+    预定人id
+    书二维码
+    是否有效
+}
+
+entity "用户" as user {
+    * user_id
+    是否暂停
+    累计逾期次数
+    占用数量
+}
+
+entity "可预订书" as available_book {
+    * isbn
+    书二维码集合
+}
+
+
+entity "rm_isbn" as ISBNStatsRM {
+    * isbn
+    累计借出次数
+    当前在馆数
+    当前借出数
+    书名
+    图片
+    简介
+}
+
+entity "rm_ISBN每日借出数" as ISBNDailyBorrowCountRM {
+    * isbn
+    * date
+    借出次数
+}
+
+
+entity "rm_借出" as borrowRM {
+    * 借书id
+    二维码
+    ISBN
+    书名
+    借书人id
+    借书人名
+    借出时间
+    应还书时间
+    还书时间
+    是否逾期
+    是否遗失
+}
+
+entity "rm_会员账号" as UserAccountStatsRM {
+    * 会员id: userId
+    会员名
+    是否暂停
+    累计逾期次数
+}
+
+book ||--o{ borrow
+book ||--o{ reserve
+available_book |o--o{ book
+borrow }o--|| user
+reserve }o--|| user
+
+@enduml

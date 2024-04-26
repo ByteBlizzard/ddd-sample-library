@@ -6,6 +6,7 @@ import io.github.byteblizzard.dddsample.library.domain.领域事件
 interface 用户聚合 {
     fun 增加逾期次数(事件队列: 临时事件队列)
     fun 启用(事件队列: 临时事件队列)
+    fun 已禁用(): Boolean
 }
 
 class 用户聚合实现(
@@ -31,6 +32,10 @@ class 用户聚合实现(
         this.暂停 = false
         this.逾期次数 = 0
         事件队列.入队(用户账号已启用(this.用户ID))
+    }
+
+    override fun 已禁用(): Boolean {
+        return this.暂停
     }
 
 }

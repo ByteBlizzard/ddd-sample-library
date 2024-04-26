@@ -7,6 +7,8 @@ interface 可预定书 {
     fun 是否包含书(二维码: String): Boolean
     fun 添加(事件队列: 临时事件队列, 二维码: String)
     fun 移除(事件队列: 临时事件队列, 二维码: String)
+    fun 不够了(): Boolean
+    fun 随机选取一本书(): String
 }
 
 class 可预定书实现(
@@ -31,6 +33,14 @@ class 可预定书实现(
         }
         this.二维码集合.remove(二维码)
         事件队列.入队(书已不可预定(isbn, 二维码))
+    }
+
+    override fun 不够了(): Boolean {
+        return this.二维码集合.isEmpty()
+    }
+
+    override fun 随机选取一本书(): String {
+        return this.二维码集合.random()
     }
 }
 

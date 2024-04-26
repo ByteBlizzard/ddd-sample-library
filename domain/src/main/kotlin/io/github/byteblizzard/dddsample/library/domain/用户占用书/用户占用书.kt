@@ -6,6 +6,7 @@ import io.github.byteblizzard.dddsample.library.domain.领域事件
 
 interface 用户占用书 {
     fun 调整(事件队列: 临时事件队列, 调整值: Int)
+    fun 占用书(): Int
 }
 
 class 用户占用书实现(
@@ -19,6 +20,10 @@ class 用户占用书实现(
             this.占用数量 = 0
         }
         事件队列.入队(用户占用书已变化(this.用户id, this.占用数量, 旧占用量))
+    }
+
+    override fun 占用书(): Int {
+        return this.占用数量
     }
 
 }
