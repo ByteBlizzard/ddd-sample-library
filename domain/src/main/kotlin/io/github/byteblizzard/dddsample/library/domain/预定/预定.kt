@@ -3,6 +3,8 @@ package io.github.byteblizzard.dddsample.library.domain.预定
 import io.github.byteblizzard.dddsample.library.domain.临时事件队列
 import io.github.byteblizzard.dddsample.library.domain.用户.用户ID
 import io.github.byteblizzard.dddsample.library.domain.领域事件
+import io.github.byteblizzard.dddsample.library.domain.领域对象注册表.获取书仓库
+import io.github.byteblizzard.dddsample.library.domain.领域对象注册表.获取可预订书仓库
 import java.time.LocalDateTime
 
 interface 预定 {
@@ -48,6 +50,9 @@ class 预定实现(
             预定人 = this.预定人
         ))
 
+        val 可预订书 = 获取可预订书仓库().按照id查找或报错(获取书仓库().按照二维码查询或报错(this.二维码).isbn)
+        可预订书.添加(事件队列, this.二维码)
+        获取可预订书仓库().保存(可预订书)
     }
 
     override fun 预订人ID(): 用户ID {

@@ -7,11 +7,12 @@ interface 书聚合 {
     fun 上架(事件队列: 临时事件队列)
     fun 下架(事件队列: 临时事件队列)
     fun 上架中(): Boolean
+    val isbn: String
 }
 
 class 书聚合实现(
     val 二维码: String,
-    val isbn: String,
+    override val isbn: String,
     var 上架: Boolean
 ): 书聚合 {
     override fun 上架(事件队列: 临时事件队列) {
@@ -44,5 +45,5 @@ interface 书仓库 {
     fun 保存(书: 书聚合)
 }
 
-class 书已上架(二维码: String): 领域事件
-class 书已下架(二维码: String): 领域事件
+class 书已上架(val 二维码: String): 领域事件
+class 书已下架(val 二维码: String): 领域事件
