@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 interface 预定 {
     fun 尝试超时(事件队列: 临时事件队列)
     fun 取消(事件队列: 临时事件队列, 命令: 取消预订命令)
+    fun 预订人ID(): 用户ID
 }
 
 class 预定ID(val value: String)
@@ -49,11 +50,15 @@ class 预定实现(
 
     }
 
+    override fun 预订人ID(): 用户ID {
+        return this.预定人
+    }
+
 }
 
 interface 预定仓库 {
     fun 按照id查找或报错(预定id: 预定ID): 预定
-    fun 按照二维码查找或报错(二维码: String): 预定
+    fun 按照二维码查找有效预定(二维码: String): 预定?
     fun 保存(预定: 预定)
 }
 

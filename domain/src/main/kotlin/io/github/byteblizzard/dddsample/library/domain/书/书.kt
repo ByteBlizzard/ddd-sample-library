@@ -6,6 +6,7 @@ import io.github.byteblizzard.dddsample.library.domain.领域事件
 interface 书聚合 {
     fun 上架(事件队列: 临时事件队列)
     fun 下架(事件队列: 临时事件队列)
+    fun 上架中(): Boolean
 }
 
 class 书聚合实现(
@@ -29,6 +30,10 @@ class 书聚合实现(
 
         this.上架 = false
         事件队列.入队(书已下架(this.二维码))
+    }
+
+    override fun 上架中(): Boolean {
+        return this.上架
     }
 
 }
