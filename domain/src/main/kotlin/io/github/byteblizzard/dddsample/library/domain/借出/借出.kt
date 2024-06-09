@@ -21,7 +21,8 @@ class 借出实现(
     var 上报过遗失: Boolean,
     var 待还书: Boolean,
     val 借出时间: LocalDateTime,
-    val 借出人: 用户ID
+    val 借出人: 用户ID,
+    var 已报告过逾期: Boolean = false
 ): 借出 {
     override fun 归还(事件队列: 临时事件队列) {
         if (!待还书) {
@@ -36,13 +37,7 @@ class 借出实现(
             归还前已遗失 = this.上报过遗失
         ))
 
-        if (当前已逾期()) {
-            事件队列.入队(还书已逾期(
-                借出ID = this.借出ID,
-                二维码 = this.二维码,
-                借出人 = 借出人,
-            ))
-        }
+        逾期(事件队列)
     }
 
     private fun 当前已逾期(): Boolean =  this.借出时间.plusMonths(1).isBefore(LocalDateTime.now())
@@ -68,7 +63,12 @@ class 借出实现(
             return
         }
 
-        if (当前已逾期()) {
+        逾期(事件队列)
+    }
+
+    private fun 逾期(事件队列: 临时事件队列) {
+        if (!this.已报告过逾期 && 当前已逾期()) {
+            this.已报告过逾期 = true
             事件队列.入队(还书已逾期(
                 借出ID = this.借出ID,
                 二维码 = this.二维码,
@@ -76,7 +76,6 @@ class 借出实现(
             ))
         }
     }
-
 }
 
 interface 借出仓库 {
