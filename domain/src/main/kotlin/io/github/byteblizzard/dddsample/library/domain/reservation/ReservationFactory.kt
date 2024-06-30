@@ -1,4 +1,4 @@
-package io.github.byteblizzard.dddsample.library.domain.booking
+package io.github.byteblizzard.dddsample.library.domain.reservation
 
 import io.github.byteblizzard.dddsample.library.domain.availablebooks.AvailableBooksRepository
 import io.github.byteblizzard.dddsample.library.domain.user.UserId

@@ -4,9 +4,13 @@ import io.github.byteblizzard.dddsample.library.domain.user.UserId
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainException
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher
+import jakarta.persistence.*
 import java.time.LocalDateTime
 
-class LendId(val value: String)
+class LendId(
+    @Column(name = "id")
+    val value: String
+)
 
 interface Lend {
     fun returnBack()
@@ -14,12 +18,18 @@ interface Lend {
     fun tryOverdue()
 }
 
+@Entity(name = "Lend")
+@Table(name = "t_lend")
+@AttributeOverride(name = "lendOutUser.value", column = Column(name = "lend_user_id"))
 class LendImpl(
+    @EmbeddedId
     val id: LendId,
     val bookId: String,
     var reportedLost: Boolean,
     var waitReturn: Boolean,
     val lendOutTime: LocalDateTime,
+
+    @Embedded
     val lendOutUser: UserId,
     var reportedOverdue: Boolean = false
 ): Lend {

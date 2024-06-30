@@ -2,6 +2,9 @@ package io.github.byteblizzard.dddsample.library.domain.user
 
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher
+import jakarta.persistence.EmbeddedId
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 interface User {
     fun increaseOverdueTimes()
@@ -9,9 +12,14 @@ interface User {
     val suspended: Boolean
 }
 
+@Entity
+@Table(name = "t_user")
 class UserImpl(
+    @EmbeddedId
     private val userId: UserId,
+
     var overdueTimes: Int,
+
     override var suspended: Boolean
 ): User {
 

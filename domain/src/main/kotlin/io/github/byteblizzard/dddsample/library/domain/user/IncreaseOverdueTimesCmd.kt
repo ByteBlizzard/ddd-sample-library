@@ -1,8 +1,12 @@
 package io.github.byteblizzard.dddsample.library.domain.user
 
+import jakarta.persistence.Column
 import org.springframework.stereotype.Service
 
-class UserId(val value: String)
+class UserId(
+    @Column(name = "id")
+    val value: String
+)
 class IncreaseOverdueTimesCmd(
     val userId: UserId
 )

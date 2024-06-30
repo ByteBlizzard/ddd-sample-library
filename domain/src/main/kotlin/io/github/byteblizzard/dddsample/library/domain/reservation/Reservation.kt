@@ -1,10 +1,11 @@
-package io.github.byteblizzard.dddsample.library.domain.booking
+package io.github.byteblizzard.dddsample.library.domain.reservation
 
 import io.github.byteblizzard.dddsample.library.domain.user.UserId
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.bookRepository
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.availableBooksRepository
+import jakarta.persistence.*
 import java.time.LocalDateTime
 
 interface Reservation {
@@ -13,12 +14,24 @@ interface Reservation {
     val reserveUserId: UserId
 }
 
-class ReservationId(val value: String)
+class ReservationId(
+    @Column(name = "id")
+    val value: String
+)
 
+@Entity(name = "Reservation")
+@Table(name = "t_reservation")
+@AttributeOverrides( value = [
+    AttributeOverride(name = "reserveUserId.value", column = Column(name = "reserveUserId"))
+])
 class ReservationImpl(
+    @EmbeddedId
     val id: ReservationId,
     val reserveTime: LocalDateTime,
+
+    @Embedded
     override val reserveUserId: UserId,
+
     val bookId: String,
     var effective: Boolean
 ): Reservation {

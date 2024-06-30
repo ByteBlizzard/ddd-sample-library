@@ -4,7 +4,7 @@ import io.github.byteblizzard.dddsample.library.domain.book.BookRepository
 import io.github.byteblizzard.dddsample.library.domain.user.UserId
 import io.github.byteblizzard.dddsample.library.domain.user.UserRepository
 import io.github.byteblizzard.dddsample.library.domain.occupybooks.OccupyBooksRepository
-import io.github.byteblizzard.dddsample.library.domain.booking.ReservationRepository
+import io.github.byteblizzard.dddsample.library.domain.reservation.ReservationRepository
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainException
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher

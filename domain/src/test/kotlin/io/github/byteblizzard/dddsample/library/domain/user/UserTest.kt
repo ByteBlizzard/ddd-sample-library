@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class UserTest {
     @Test
-    fun `逾期达到3次会暂停账号`() {
+    fun case1() {
         // given
         val eventPublisher: DomainEventPublisher = mockk()
         every { eventPublisher.publish(any(DomainEvent::class)) } just runs
@@ -47,7 +47,7 @@ class UserTest {
     }
 
     @Test
-    fun enable账号() {
+    fun enable() {
         // given
         val eventPublisher: DomainEventPublisher = mockk()
         every { eventPublisher.publish(any(DomainEvent::class)) } just runs
@@ -61,10 +61,10 @@ class UserTest {
         )
         every { eventPublisher.publish(any(UserEnabledEvent::class)) } just runs
 
-        // 当
+        // when
         target.enable()
 
-        // 则
+        // then
         assertEquals(0, target.overdueTimes)
         assertFalse(target.suspended)
 

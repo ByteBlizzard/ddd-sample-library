@@ -2,6 +2,9 @@ package io.github.byteblizzard.dddsample.library.domain.book
 
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 
 interface Book {
     fun putOnShelf()
@@ -10,7 +13,10 @@ interface Book {
     val isbn: String
 }
 
+@Entity
+@Table(name = "t_book")
 class BookImpl(
+    @Id
     val bookId: String,
     override val isbn: String,
     var onShelf: Boolean

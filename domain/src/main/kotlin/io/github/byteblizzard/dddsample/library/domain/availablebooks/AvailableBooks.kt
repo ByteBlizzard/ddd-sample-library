@@ -2,6 +2,7 @@ package io.github.byteblizzard.dddsample.library.domain.availablebooks
 
 import io.github.byteblizzard.dddsample.library.domain.DomainEvent
 import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPublisher
+import jakarta.persistence.*
 
 interface AvailableBooks {
     fun containsBook(bookId: String): Boolean
@@ -11,8 +12,13 @@ interface AvailableBooks {
     fun chooseBookRandomly(): String
 }
 
+@Entity(name = "AvailableBooks")
+@Table(name = "t_available_books")
 class AvailableBooksImpl(
+    @Id
     val isbn: String,
+
+    @ElementCollection
     val bookIds: MutableSet<String>
 ): AvailableBooks {
     override fun containsBook(bookId: String): Boolean {

@@ -1,4 +1,4 @@
-package io.github.byteblizzard.dddsample.library.domain.booking
+package io.github.byteblizzard.dddsample.library.domain.reservation
 
 import org.springframework.stereotype.Component
 
