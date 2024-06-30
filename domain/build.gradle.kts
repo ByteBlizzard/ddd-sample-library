@@ -17,6 +17,10 @@ repositories {
 
 dependencies {
     val mockkVersion = "1.13.10"
+    implementation(platform("org.axonframework:axon-bom:4.9.4"))
+    api("org.axonframework:axon-modelling:4.9.3")
+    api("org.axonframework:axon-eventsourcing:4.9.3")
+    api("org.axonframework:axon-spring:4.9.3")
     implementation("org.springframework:spring-context:6.1.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation(kotlin("test"))
