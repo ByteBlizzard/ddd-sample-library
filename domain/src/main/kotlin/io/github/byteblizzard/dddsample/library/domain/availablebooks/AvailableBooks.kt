@@ -19,7 +19,7 @@ class AvailableBooksImpl(
     val isbn: String,
 
     @ElementCollection
-    val bookIds: MutableSet<String>
+    val bookIds: MutableSet<String> = mutableSetOf()
 ): AvailableBooks {
     override fun containsBook(bookId: String): Boolean {
         return this.bookIds.contains(bookId)
@@ -51,7 +51,7 @@ class AvailableBooksImpl(
 }
 
 interface AvailableBooksRepository {
-    fun findByIdOrError(isbn: String): AvailableBooks
+    fun findById(isbn: String): AvailableBooks
     fun save(availableBooks: AvailableBooks)
 }
 

@@ -12,7 +12,7 @@ class RemoveFromAvailableCmdHandler(
     val availableBooksRepository: AvailableBooksRepository
 ) {
     fun handle(cmd: RemoveFromAvailableCmd) {
-        val availableBooks = this.availableBooksRepository.findByIdOrError(cmd.isbn)
+        val availableBooks = this.availableBooksRepository.findById(cmd.isbn)
         availableBooks.remove(cmd.bookId)
         this.availableBooksRepository.save(availableBooks)
     }

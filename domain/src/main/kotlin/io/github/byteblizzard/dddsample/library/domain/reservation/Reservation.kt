@@ -63,7 +63,7 @@ class ReservationImpl(
             reserveUserId = this.reserveUserId
         ))
 
-        val availableBooks = availableBooksRepository().findByIdOrError(bookRepository().findByIdOrError(this.bookId).isbn)
+        val availableBooks = availableBooksRepository().findById(bookRepository().findByIdOrError(this.bookId).isbn)
         availableBooks.add(this.bookId)
         availableBooksRepository().save(availableBooks)
     }

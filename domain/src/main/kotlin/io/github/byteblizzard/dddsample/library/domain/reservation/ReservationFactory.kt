@@ -23,7 +23,7 @@ class ReservationFactory(
             throw DomainException("预定人账户已禁用，不可预定书")
         }
 
-        val availableBooks = this.availableBooksRepository.findByIdOrError(reserveCmd.isbn)
+        val availableBooks = this.availableBooksRepository.findById(reserveCmd.isbn)
         if (availableBooks.isEmpty()) {
             throw DomainException("没有可预订的书了")
         }

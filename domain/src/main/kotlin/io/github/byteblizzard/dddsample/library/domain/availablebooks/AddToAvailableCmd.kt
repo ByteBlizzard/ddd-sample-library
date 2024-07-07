@@ -12,7 +12,7 @@ class AddToAvailableCmdHandler(
     val availableBooksRepository: AvailableBooksRepository
 ) {
     fun handle(cmd: AddToAvailableCmd) {
-        val availableBooks = this.availableBooksRepository.findByIdOrError(cmd.isbn)
+        val availableBooks = this.availableBooksRepository.findById(cmd.isbn)
         availableBooks.add(cmd.bookId)
         this.availableBooksRepository.save(availableBooks)
     }

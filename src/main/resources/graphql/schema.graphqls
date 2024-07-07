@@ -5,3 +5,17 @@ type Query {
 type Test {
     id: String
 }
+
+type Mutation {
+    stockInBook(book: Book): String
+    putOnShelf(bookId: String): String
+    takeOffShelf(bookId: String): String
+}
+
+input Book {
+    bookId: String
+    isbn: String
+    name: String
+    picture: String
+    description: String
+}
