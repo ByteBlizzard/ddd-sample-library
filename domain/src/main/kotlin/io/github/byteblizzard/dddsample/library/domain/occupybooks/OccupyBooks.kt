@@ -37,7 +37,7 @@ class OccupyBooksImpl(
 }
 
 interface OccupyBooksRepository {
-    fun findByIdOrError(userId: UserId): OccupyBooks
+    fun findById(userId: UserId): OccupyBooks
     fun save(occupyBooks: OccupyBooks)
 }
 

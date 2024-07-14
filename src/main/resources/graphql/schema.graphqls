@@ -10,6 +10,8 @@ type Mutation {
     stockInBook(book: Book): String
     putOnShelf(bookId: String): String
     takeOffShelf(bookId: String): String
+    reserveBook(isbn: String, userId: String): String
+    cancelReservation(reservationId: String): String
 }
 
 input Book {

@@ -35,7 +35,7 @@ class LendFactory (
             throw DomainException("书已被别人预定，不能借出")
         }
 
-        val occupyBooks = this.occupyBooksRepository.findByIdOrError(cmd.lendOutUserId)
+        val occupyBooks = this.occupyBooksRepository.findById(cmd.lendOutUserId)
         if (occupyBooks.countOfOccupiedBooks() >= 3) {
             throw DomainException("用户已经占用3本书，不能借出更多书")
         }

@@ -7,6 +7,7 @@ import io.github.byteblizzard.dddsample.library.domain.DomainRegistry.eventPubli
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
+@Embeddable
 class LendId(
     @Column(name = "id")
     val value: String

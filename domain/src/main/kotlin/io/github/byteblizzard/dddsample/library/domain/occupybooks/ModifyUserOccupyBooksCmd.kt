@@ -14,7 +14,7 @@ class ModifyUserOccupyBooksCmdHandler(
 ) {
 
     fun handle(cmd: ModifyUserOccupyBooksCmd) {
-        val occupyBooks = this.occupyBooksRepository.findByIdOrError(cmd.userId)
+        val occupyBooks = this.occupyBooksRepository.findById(cmd.userId)
         occupyBooks.modify(cmd.increment)
         this.occupyBooksRepository.save(occupyBooks)
     }

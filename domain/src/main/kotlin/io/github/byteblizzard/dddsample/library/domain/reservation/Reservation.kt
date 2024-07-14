@@ -14,6 +14,7 @@ interface Reservation {
     val reserveUserId: UserId
 }
 
+@Embeddable
 class ReservationId(
     @Column(name = "id")
     val value: String

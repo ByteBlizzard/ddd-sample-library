@@ -1,8 +1,10 @@
 package io.github.byteblizzard.dddsample.library.domain.user
 
 import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
 import org.springframework.stereotype.Service
 
+@Embeddable
 class UserId(
     @Column(name = "id")
     val value: String
