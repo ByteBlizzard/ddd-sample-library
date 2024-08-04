@@ -7,7 +7,7 @@ class TakeOffShelfCmd(
 )
 
 @Service
-class TakeOffShelfHandler(
+class TakeOffShelfCmdHandler(
     private val BookRepository: BookRepository
 ) {
     fun handle(cmd: TakeOffShelfCmd) {

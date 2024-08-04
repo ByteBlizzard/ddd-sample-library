@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 interface Reservation {
     fun tryOverdue()
     fun cancel(cmd: CancelReservationCmd)
+    val id: ReservationId
     val reserveUserId: UserId
 }
 
@@ -27,7 +28,7 @@ class ReservationId(
 ])
 class ReservationImpl(
     @EmbeddedId
-    val id: ReservationId,
+    override val id: ReservationId,
     val reserveTime: LocalDateTime,
 
     @Embedded

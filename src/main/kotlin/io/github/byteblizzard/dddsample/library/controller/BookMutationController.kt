@@ -14,7 +14,7 @@ class BookMutationController(
     private val stockInBookCmdHandlerTx: StockInBookCmdHandlerTx,
     private val putOnShelfCmdHandler: PutOnShelfCmdHandler,
     transactionManager: PlatformTransactionManager,
-    private val takeOffShelfHandler: TakeOffShelfHandler
+    private val takeOffShelfCmdHandler: TakeOffShelfCmdHandler
 ) {
     private val transactionTemplate = TransactionTemplate(transactionManager)
 
@@ -41,7 +41,7 @@ class BookMutationController(
     @MutationMapping
     fun takeOffShelf(@Argument("bookId") bookId: String): String {
         transactionTemplate.execute {
-            takeOffShelfHandler.handle(TakeOffShelfCmd(bookId))
+            takeOffShelfCmdHandler.handle(TakeOffShelfCmd(bookId))
         }
         return "OK"
     }
